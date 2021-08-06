@@ -28,6 +28,15 @@ int main()
 	cout << "Blue: ";
 	cin >> blue;
 
+	if (red <= 0)
+		red = 1;
+
+	if (blue <= 0)
+		blue = 1;
+
+	if (green <= 0)
+		green = 1;
+
 	if (c > 10)
 		c = 10;
 
@@ -53,7 +62,7 @@ int main()
 			int y = r * sin(a) + H/2;
 
 			CircleShape point(4);
-			point.setFillColor(Color(n % red, green, blue));;
+			point.setFillColor(Color(n % red, n % green, n % blue));
 			point.setOutlineThickness(1);
 			point.setOutlineColor(Color(0, 0, 0));
 			point.setPosition(x, y);
