@@ -16,7 +16,7 @@ float Angle = 137.5;
 int main()
 {
 
-	cout << "Spacing : ";
+	cout << "Spacing [0.0 - 10.0] : ";
     cin >> c;
 	cout << "Angle [0 - 360]: ";
 	cin >> Angle;
@@ -28,8 +28,15 @@ int main()
 	cout << "Blue: ";
 	cin >> blue;
 
-	sf::RenderWindow window(sf::VideoMode(W, H), " :> ");
+	if (c > 10)
+		c = 10;
 
+	if (Angle > 360)
+		Angle = 360;
+
+	sf::ContextSettings settings;
+	sf::RenderWindow window(sf::VideoMode(W, H), "Phyllotaxis", sf::Style::Close);
+	
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -39,22 +46,22 @@ int main()
 				window.close();
 		}
 
-		float a = n * Angle;
-		float r = c * sqrt(n);
-		int x = r * cos(a) + W/2;
-		int y = r * sin(a) + H/2;
+		if (n < 5000) {
+			float a = n * Angle;
+			float r = c * sqrt(n);
+			int x = r * cos(a) + W/2;
+			int y = r * sin(a) + H/2;
 
-		CircleShape point(4);
-		point.setFillColor(Color(n % red, green, blue));;
-		point.setOutlineThickness(1);
-		point.setOutlineColor(Color(0, 0, 0));
-		point.setPosition(x, y);
+			CircleShape point(4);
+			point.setFillColor(Color(n % red, green, blue));;
+			point.setOutlineThickness(1);
+			point.setOutlineColor(Color(0, 0, 0));
+			point.setPosition(x, y);
 
-		//window.clear();
-		window.draw(point);
-		window.display();
-		n++;
-
+			window.draw(point);
+			window.display();
+			n++;
+		}
 	}
 	return NULL;
 }
